@@ -1,0 +1,337 @@
+<Window x:Class="ProspectRenamer.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Prospect Renamer"
+        Width="1180"
+        Height="790"
+        MinWidth="920"
+        MinHeight="650"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
+    <Window.Resources>
+        <DrawingBrush x:Key="TechnicalGrid" TileMode="Tile" Viewport="0,0,36,36" ViewportUnits="Absolute" Opacity="0.3">
+            <DrawingBrush.Drawing>
+                <GeometryDrawing Brush="Transparent">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#14252B" Thickness="0.6" />
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <LineGeometry StartPoint="0,0" EndPoint="36,0" />
+                            <LineGeometry StartPoint="0,0" EndPoint="0,36" />
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Rectangle Fill="{StaticResource TechnicalGrid}" IsHitTestVisible="False" />
+
+        <Grid Margin="28,22,28,24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="2,0,2,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="5" Height="39" Background="{StaticResource AccentBrush}" Margin="0,2,14,0" />
+                        <StackPanel>
+                            <TextBlock Text="PROSPECT RENAMER" FontSize="26" FontWeight="SemiBold" />
+                            <StackPanel Orientation="Horizontal" Margin="1,4,0,0">
+                                <TextBlock Text="ICARUS PROSPECT MANAGEMENT UTILITY  /  UNOFFICIAL"
+                                           Foreground="{StaticResource MutedTextBrush}"
+                                           FontSize="10" />
+                                <TextBlock Text="  /  " Foreground="#496066" FontSize="10" />
+                                <TextBlock Text="{Binding AppVersion}"
+                                           Foreground="{StaticResource AccentBrush}"
+                                           FontSize="10"
+                                           FontWeight="SemiBold" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Grid.Column="1" BorderThickness="1" Padding="14,9">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="#301719" />
+                            <Setter Property="BorderBrush" Value="{StaticResource ErrorBrush}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsIcarusRunning}" Value="True">
+                                    <Setter Property="Background" Value="#102C29" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="8" Height="8" Margin="0,0,10,0">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Fill" Value="{StaticResource ErrorBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsIcarusRunning}" Value="True">
+                                            <Setter Property="Fill" Value="{StaticResource AccentBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                        <StackPanel>
+                            <TextBlock FontSize="10" FontWeight="Bold">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="ICARUS IS NOT RUNNING" />
+                                        <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsIcarusRunning}" Value="True">
+                                                <Setter Property="Text" Value="ICARUS IS RUNNING" />
+                                                <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock FontSize="10" Margin="0,2,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Start the game and wait at the main menu before making changes." />
+                                        <Setter Property="Foreground" Value="#D4A3A3" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsIcarusRunning}" Value="True">
+                                                <Setter Property="Text" Value="Main menu ready? You can modify an unloaded prospect." />
+                                                <Setter Property="Foreground" Value="#A9D7D0" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="1"
+                    Background="{StaticResource PanelBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    Padding="18,15"
+                    Margin="0,0,0,14">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,20,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="SAVE LOCATION" FontSize="10" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" />
+                            <Border Background="{StaticResource AccentDarkBrush}" Margin="12,-3,0,0" Padding="8,3" CornerRadius="2">
+                                <TextBlock Text="{Binding LocationMode}" FontSize="9" Foreground="{StaticResource AccentBrush}" />
+                            </Border>
+                        </StackPanel>
+                        <TextBlock Text="{Binding LocationDisplay}"
+                                   FontFamily="Cascadia Mono, Consolas"
+                                   FontSize="11"
+                                   Foreground="#B7C7C9"
+                                   Margin="0,8,0,0"
+                                   TextTrimming="CharacterEllipsis"
+                                   MaxHeight="45" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Content="BROWSE FOLDER" Click="BrowseFolder_Click" Margin="0,0,8,0" />
+                        <Button Content="AUTO DETECT" Command="{Binding AutoDetectCommand}" Margin="0,0,8,0" />
+                        <Button Content="REFRESH" Command="{Binding RefreshCommand}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2"
+                    Background="{StaticResource PanelBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Margin="18,13,18,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="DETECTED PROSPECTS" FontSize="11" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding ValidProspectCount, StringFormat={}{0} VALID}"
+                                   FontSize="10"
+                                   Foreground="{StaticResource AccentBrush}" />
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <DataGrid x:Name="ProspectGrid"
+                                  ItemsSource="{Binding Prospects}"
+                                  SelectedItem="{Binding SelectedProspect}"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="STATUS" Width="72">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Ellipse Width="8" Height="8" HorizontalAlignment="Left">
+                                                    <Ellipse.Style>
+                                                        <Style TargetType="Ellipse">
+                                                            <Setter Property="Fill" Value="{StaticResource ErrorBrush}" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsValid}" Value="True">
+                                                                    <Setter Property="Fill" Value="{StaticResource AccentBrush}" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Ellipse.Style>
+                                                </Ellipse>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="PROSPECT NAME" Binding="{Binding ProspectName}" Width="2*" />
+                                <DataGridTextColumn Header="PROSPECT / MAP TYPE" Binding="{Binding ProspectType}" Width="1.55*" />
+                                <DataGridTextColumn Header="FILE" Binding="{Binding FileName}" Width="1.45*" />
+                                <DataGridTextColumn Header="ACCOUNT" Binding="{Binding AccountId}" Width="1.15*" />
+                                <DataGridTextColumn Header="LAST MODIFIED" Binding="{Binding LastModified, StringFormat={}{0:yyyy-MM-dd  HH:mm}}" Width="145" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding HasProspects}" Value="False" />
+                                                <Condition Binding="{Binding IsBusy}" Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <TextBlock Text="NO PROSPECTS DETECTED" HorizontalAlignment="Center" FontSize="15" Foreground="#9EAFB2" />
+                            <TextBlock Text="Select a Prospects folder or a parent directory to begin."
+                                       HorizontalAlignment="Center"
+                                       Foreground="{StaticResource MutedTextBrush}"
+                                       FontSize="11"
+                                       Margin="0,8,0,0" />
+                        </StackPanel>
+
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="3" Margin="0,14,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Border Background="#0B1519" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15,10" Margin="0,0,14,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="0,0,18,0">
+                            <TextBlock Text="SYSTEM STATUS" FontSize="9" Foreground="{StaticResource MutedTextBrush}" />
+                            <TextBlock Text="●  READY" FontSize="10" Foreground="{StaticResource AccentBrush}" Margin="0,6,0,0" />
+                        </StackPanel>
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding StatusHistory}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,0,26,0" MaxWidth="245">
+                                        <TextBlock Text="{Binding Message}" FontSize="10" Foreground="#C7D5D6" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding Detail}" FontSize="9" Foreground="#667B80" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="BACKUPS" Style="{StaticResource QuietButton}" Click="OpenBackups_Click" Margin="0,0,6,0" />
+                    <Button Content="SETTINGS" Style="{StaticResource QuietButton}" Click="Settings_Click" Margin="0,0,10,0" />
+                    <Button Content="RENAME / DUPLICATE"
+                            Style="{StaticResource AccentButton}"
+                            IsEnabled="{Binding CanRenameSelected}"
+                            Click="RenameProspect_Click"
+                            MinWidth="176" />
+                </StackPanel>
+            </Grid>
+
+            <Border Grid.RowSpan="4"
+                    Panel.ZIndex="100"
+                    Background="#E6081014"
+                    Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}">
+                <Border Width="620"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="#071115"
+                        BorderBrush="{StaticResource AccentBrush}"
+                        BorderThickness="1"
+                        Padding="24">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,18">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Width="8" Height="8" Fill="#EF7777" Margin="0,0,7,0" />
+                                <Ellipse Width="8" Height="8" Fill="#F0AD5D" Margin="0,0,7,0" />
+                                <Ellipse Width="8" Height="8" Fill="#55D8C9" />
+                            </StackPanel>
+                            <TextBlock Text="PROSPECT RENAMER TERMINAL"
+                                       HorizontalAlignment="Center"
+                                       FontFamily="Cascadia Mono, Consolas"
+                                       FontSize="10"
+                                       Foreground="#71878C" />
+                        </Grid>
+                        <TextBlock Text="{Binding BusyTitle}"
+                                   FontFamily="Cascadia Mono, Consolas"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentBrush}" />
+                        <TextBlock Text="{Binding BusyDetail}"
+                                   FontFamily="Cascadia Mono, Consolas"
+                                   FontSize="12"
+                                   Foreground="#BDD0D1"
+                                   Margin="0,16,0,18" />
+                        <ProgressBar Height="4"
+                                     IsIndeterminate="True"
+                                     Foreground="{StaticResource AccentBrush}" />
+                        <TextBlock Text="Do not close Icarus or Prospect Renamer while this transaction is active."
+                                   FontFamily="Cascadia Mono, Consolas"
+                                   FontSize="9"
+                                   Foreground="#60777C"
+                                   Margin="0,14,0,0" />
+                    </StackPanel>
+                </Border>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

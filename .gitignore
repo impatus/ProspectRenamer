@@ -1,0 +1,34 @@
+# Build output
+bin/
+obj/
+publish/
+TestResults/
+artifacts/
+*.exe
+*.dll
+*.pdb
+*.zip
+*.7z
+*.rar
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs and local settings
+*.log
+settings.json
+.env
+.env.*
+*.json.backup*
+*.pfx
+*.snk
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,49 @@
+<Window x:Class="ProspectRenamer.App.Dialogs.RenameWarningDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Before You Modify a Prospect"
+        Width="620"
+        Height="590"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner">
+    <Border BorderBrush="#76512B" BorderThickness="1" Background="{StaticResource PanelBrush}" Padding="28">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Ellipse Width="10" Height="10" Fill="{StaticResource WarningBrush}" Margin="0,0,12,0" />
+                <TextBlock Text="BEFORE YOU CONTINUE" FontSize="18" FontWeight="SemiBold" />
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1"
+                          Margin="22,26,0,18"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Margin="0,0,14,0">
+                    <TextBlock Text="• Make sure the prospect is not actively loaded." FontSize="13" Margin="0,0,0,13" />
+                    <TextBlock Text="• An untouched backup will be created automatically." FontSize="13" Margin="0,0,0,13" />
+                    <TextBlock Text="• Rename migrates matching workshop/loadout references for this local account and creates a separate Loadouts.json backup. Other players' local files cannot be changed."
+                               TextWrapping="Wrap" FontSize="13" LineHeight="19" Margin="0,0,0,13" />
+                    <TextBlock Text="• Icarus autosave backups for the old name are hash-verified and archived outside the live folder so the game cannot restore the removed prospect."
+                               TextWrapping="Wrap" FontSize="13" LineHeight="19" Margin="0,0,0,13" />
+                    <TextBlock Text="• Preferably have affected characters safely exit the prospect first. Duplicate never moves loadout references from the original."
+                               TextWrapping="Wrap" FontSize="13" LineHeight="19" />
+                    <TextBlock Text="• Steam Cloud can restore a removed file. Either disable Cloud, or start Icarus first and wait until the main menu and Cloud sync are fully ready before modifying the unloaded prospect."
+                               TextWrapping="Wrap" FontSize="13" LineHeight="19" Margin="0,13,0,0" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <CheckBox x:Name="DontShowCheckBox" Grid.Row="2" Content="Don't show this warning again" Margin="0,0,0,22" />
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="CANCEL" IsCancel="True" Margin="0,0,8,0" />
+                <Button Content="CONTINUE" Style="{StaticResource AccentButton}" IsDefault="True" Click="Continue_Click" MinWidth="118" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

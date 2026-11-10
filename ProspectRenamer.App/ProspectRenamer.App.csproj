@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProspectRenamer.Core\ProspectRenamer.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>ProspectRenamer</AssemblyName>
+    <RootNamespace>ProspectRenamer.App</RootNamespace>
+    <Product>Prospect Renamer</Product>
+    <Description>Unofficial local save management utility for Icarus prospects.</Description>
+    <Authors>Prospect Renamer contributors</Authors>
+    <Version>1.0.9</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\ProspectRenamer.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\ProspectRenamer.ico" />
+    <None Include="..\LICENSE" Link="LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\THIRD-PARTY-NOTICES.md" Link="THIRD-PARTY-NOTICES.md" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\third_party\IcarusSaveLib\LICENSE.txt" Link="licenses\IcarusSaveLib-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\third_party\UeSaveGame\LICENSE.txt" Link="licenses\UeSaveGame-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

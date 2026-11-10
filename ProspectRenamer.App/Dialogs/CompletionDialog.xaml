@@ -1,0 +1,115 @@
+<Window x:Class="ProspectRenamer.App.Dialogs.CompletionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Prospect Operation Complete"
+        Width="620"
+        Height="410"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
+    <Border Background="#0A1519"
+            BorderBrush="{StaticResource AccentBrush}"
+            BorderThickness="1"
+            CornerRadius="3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="46" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Background="#0D1C21" BorderBrush="#284047" BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Header_MouseLeftButtonDown">
+                <Grid Margin="18,0,8,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Ellipse Width="8" Height="8" Fill="{StaticResource AccentBrush}" Margin="0,0,10,0" />
+                        <TextBlock Text="ORBITAL SAVE SYSTEM"
+                                   FontFamily="Cascadia Mono, Consolas"
+                                   FontSize="10"
+                                   FontWeight="SemiBold"
+                                   Foreground="#9FB5B8" />
+                    </StackPanel>
+                    <Button HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Content="×"
+                            Click="Close_Click"
+                            Style="{StaticResource QuietButton}"
+                            FontSize="20"
+                            FontWeight="Normal"
+                            Padding="10,2"
+                            MinHeight="30"
+                            ToolTip="Close" />
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" Margin="30,25,30,28">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal">
+                    <Border Width="54" Height="54" CornerRadius="27"
+                            Background="#123D3C" BorderBrush="{StaticResource AccentBrush}" BorderThickness="1">
+                        <TextBlock Text="✓"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Segoe UI Symbol"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource AccentBrush}" />
+                    </Border>
+                    <StackPanel Margin="18,3,0,0">
+                        <TextBlock Text="TRANSACTION COMPLETE" FontSize="20" FontWeight="SemiBold" />
+                        <TextBlock Text="All verification checks passed."
+                                   FontFamily="Cascadia Mono, Consolas"
+                                   FontSize="10"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Margin="0,5,0,0" />
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBlock Grid.Row="1"
+                           Text="{Binding OperationSummary}"
+                           FontSize="13"
+                           Foreground="#C7D5D6"
+                           Margin="0,22,0,0" />
+
+                <Border Grid.Row="2" Background="#071115" BorderBrush="#24383E" BorderThickness="1"
+                        Padding="14,11" Margin="0,15,0,0">
+                    <TextBlock Text="{Binding NameTransition}"
+                               FontFamily="Cascadia Mono, Consolas"
+                               FontSize="11"
+                               Foreground="#9FB5B8"
+                               TextTrimming="CharacterEllipsis" />
+                </Border>
+
+                <StackPanel Grid.Row="3" Margin="0,18,0,0">
+                    <TextBlock Text="NEXT STEP" FontSize="9" FontWeight="SemiBold"
+                               Foreground="{StaticResource WarningBrush}" />
+                    <TextBlock Text="Close Icarus normally, then wait for Steam Cloud to finish syncing before starting the game again."
+                               TextWrapping="Wrap"
+                               FontSize="12"
+                               LineHeight="18"
+                               Foreground="#C6B29C"
+                               Margin="0,6,0,0" />
+                </StackPanel>
+
+                <Button Grid.Row="4"
+                        Content="UNDERSTOOD"
+                        Style="{StaticResource AccentButton}"
+                        IsDefault="True"
+                        Click="Close_Click"
+                        HorizontalAlignment="Right"
+                        MinWidth="148" />
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
